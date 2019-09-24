@@ -1,0 +1,149 @@
+<html>
+<head>
+  <title>OAuth2 Sample App - Intuit</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script>
+    if(window.opener) {
+      window.opener.location.href = '/connected'
+      window.close()
+    }
+
+    function apiCall() {
+      $("#result").html('Loading...')
+      $.get("/api_call", function(data) {
+        $("#result").html(JSON.stringify(data, null, 3))
+      })
+    }
+
+    function getAccounts() {
+      $("#result").html('Loading...')
+      $.get("/api_call/accounts", function(data) {
+        $("#result").html(JSON.stringify(data, null, 2))
+      })
+    }
+    function selectAccount() {
+      $("#result").html('Loading...')
+      $.get("/api_call/selectAccountById", function(data) {
+        $("#result").html(JSON.stringify(data, null, 2))
+      })
+    }
+
+    function createAccount() {
+      $("#result").html('Loading...')
+      $.get("/api_call/createAccount", function(data) {
+        $("#result").html(JSON.stringify(data, null, 2))
+      })
+    }
+
+    function revokeCall() {
+      $("#result").html('Loading...')
+      $.get("/api_call/revoke", function(data) {
+        $("#result").html(JSON.stringify(data, null, 2))
+      })
+    }
+    function refreshCall() {
+      $("#result").html('Loading...')
+      $.get("/api_call/refresh", function(data) {
+        $("#result").html(JSON.stringify(data, null, 2))
+      })
+    }
+  </script>
+</head>
+  <body>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">QuickBooks Online</a>
+      <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+         <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+               <a class="nav-link" onclick="revokeCall()" href="#">Sign out</a>
+            </li>
+        </ul>
+    </nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+              <button class="nav-link" onclick="apiCall()">View Company Info</button>
+            
+          </li>
+          <li class="nav-item">
+              <button class="nav-link" onclick="getAccounts()">View Accounts</button>
+          </li>
+          <li class="nav-item">
+              <button class="nav-link" onclick="selectAccount()">Select an Account</button>
+          </li>
+          <li class="nav-item">
+              <button class="nav-link" onclick="createAccount()">Create new Account</button>
+          </li>
+         
+          
+      </div>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Dashboard</h1>
+      </div>
+
+      <div class="container">
+          <div>
+            <ul class="cta-btn-list">
+              <br><br>
+              
+              <div><code id="result"></code></div>
+            </ul>
+        
+          </div>
+        
+          <!--FORMS-->
+          <div class="section">
+            <div class="forms">
+         
+          <form action="/api_call/accounts" method="post">
+            <label for="">Company</label>
+            <input type="text" name="company" value="4620816365015365860"/>
+        
+            <label for="">Query</label>
+            <input type="text" name="query" value="Select * From Account"/>
+            <div><input type="submit" /></div>
+        
+          </form>
+        
+        <form method="post" action="">
+            <label for="">Company</label>
+            <input type="text" name="company" value="4620816365015365860"/>
+            <label for="">Entity</label>
+                <select id="selectOptions" onchange="change_selectOptions(this.value)" name="entity">
+                  <option>Account</option>
+                  <option>Bill</option>
+                  <option>Bill</option>
+                  <option>CompanyInfo</option>
+                  <option>Customer</option>
+                  <option>Employee</option>
+                  <option>Estimate</option>
+                  <option>Invoice</option>
+                  <option>Item</option>
+                  <option>Payment</option>
+                  <option>Preferences</option>
+                  <option>ProfitAndLoss</option>
+                  <option>TaxAgency</option>
+                  <option>Vendor</option>
+                </select>
+            <label for="">Entity Id</label>
+            <input type="text" name="id" />
+            <div><input type="submit" /></div>
+        </form>
+        </div>-->
+        </div>
+          </div>
+      </div>
+    </main>
+  </div>
+</div>
+</body>
+</html>
